@@ -21,35 +21,25 @@ public:
     {
         bool Finished = false;
         int sum = 0;
-        ListNode *n1 = l1;
-        ListNode *n2 = l2;
         ListNode *lresult = new ListNode();
         ListNode *nresult = lresult;
-        while (!Finished)
+        while (l1 || l2 || sum)
         {
-            if (n1 != nullptr)
+            if (l1)
             {
-                sum += n1->val;
-                n1 = n1->next;
+                sum += l1->val;
+                l1 = l1->next;
             }
-            if (n2 != nullptr)
+            if (l2)
             {
-                sum += n2->val;
-                n2 = n2->next;
+                sum += l2->val;
+                l2 = l2->next;
             }
-            nresult->val = sum % 10;
+            nresult->next = new ListNode(sum % 10);
             sum /= 10;
-            if (n1 != nullptr || n2 != nullptr || sum != 0)
-            {
-                nresult->next = new ListNode();
-                nresult = nresult->next;
-            }
-            else
-            {
-                Finished = true;
-            }
+            nresult = nresult->next;
         }
-        return lresult;
+        return lresult->next;
     }
 };
 // @lc code=end
