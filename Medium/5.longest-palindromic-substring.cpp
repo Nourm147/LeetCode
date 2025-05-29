@@ -1,5 +1,4 @@
 #include <iostream>
-#include <math.h>
 /*
  * @lc app=leetcode id=5 lang=cpp
  *
@@ -16,24 +15,20 @@ public:
         {
             return "";
         }
-        else if (s.length() == 1)
-        {
-            return s;
-        }
-
         std::string maxString = "";
+        maxString.push_back(s[0]);
         float center = 0.5;
         while (center < s.length() - 1)
         {
-            float it = (center == round(center)) ? 0 : 0.5;
-            while (round(center - it) > 0 || round(center + it) < s.length())
+            float it = (center == int(center)) ? 0 : 0.5;
+            while (int(center - it) > 0 || int(center + it) < s.length())
             {
-                bool temp = s[round(center - it)] == s[round(center + it)];
+                bool temp = s[int(center - it)] == s[int(center + it)];
                 if (temp)
                 {
                     it++;
                 }
-                if (round(center - it) < 0 || round(center + it) >= s.length())
+                if (int(center - it) < 0 || int(center + it) >= s.length())
                 {
                     it--;
                     break;
@@ -44,21 +39,16 @@ public:
                     break;
                 }
             }
-            if (maxString.length() < round(2 * it + 1))
+            if (maxString.length() < int(2 * it + 1))
             {
                 maxString.clear();
-                for (int i = round(center - it), n = round(center + it + 1); i < n; i++)
+                for (int i = int(center - it), n = int(center + it + 1); i < n; i++)
                 {
                     maxString.push_back(s[i]);
                 }
             }
             center += 0.5;
         }
-        if (maxString.empty())
-        {
-            maxString.push_back(s[0]);
-        }
-
         return maxString;
     };
 };
